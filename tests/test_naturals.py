@@ -24,3 +24,13 @@ def test_successor():
         nxt = N.succ(curr)
         assert ti(curr) + 1 == ti(nxt)
         curr = nxt
+
+
+@pytest.mark.parametrize(["a", "b", "c"], [
+    (0, 0, 0),
+    (0, 1, 1),
+    (2, 8, 10),
+    (100, 150, 250),
+])
+def test_addition(a: int, b: int, c: int):
+    assert ti(N.add(fi(a))(fi(b))) == ti(N.add(fi(a))(fi(b))) == c

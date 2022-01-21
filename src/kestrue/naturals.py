@@ -8,8 +8,13 @@ four = lambda f: lambda x: f(f(f(f(x))))
 five = lambda f: lambda x: f(f(f(f(f(x)))))
 
 
-def succ(nat):
-    return lambda f: lambda x: f(nat(f)(x))
+r"""
+succ := \n.\fx.f(nfx)
+>>> succ(2)
+n -> \gy.g(gy)
+-> fx.f(f(f(x))) # 3
+"""
+succ = lambda nat: lambda f: lambda x: f(nat(f)(x))
 
 
 def to_int(nat):
@@ -18,3 +23,14 @@ def to_int(nat):
 
 def from_int(i):
     return reduce(lambda acc, _: succ(acc), range(i), zero)
+
+
+r"""
+add := \ab.\fx.af(bfx)
+>>> add(2)(3)
+a -> \gy.g(gy)
+b -> \hz.h(h(hz))
+-> \fx: f(f(bfx))
+-> \fx: f(f(f(f(f(x))))) # 5
+"""
+add = lambda a: lambda b: lambda f: lambda x: a(f)(b(f)(x))
