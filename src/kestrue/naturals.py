@@ -18,6 +18,14 @@ succ = lambda nat: lambda f: lambda x: f(nat(f)(x))
 
 
 def to_int(nat):
+    """
+    >>> to_int(lambda f: lambda x: x)
+    0
+    >>> to_int(lambda f: lambda x: f(x))
+    1
+    >>> to_int(lambda f: lambda x: f(f(f(f(f(f(f(x))))))))
+    7
+    """
     return nat(lambda acc: acc + 1)(0)
 
 
